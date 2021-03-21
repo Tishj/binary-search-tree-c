@@ -13,13 +13,14 @@
 #include <bstree.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 
 /*
 **	return the address of the node, or the address of the variable
 **	that the node should be inserted at.
 **	sets 'parent' to the parent of the node
 */
-void	**bstree_find(t_bstree *bstree, t_data key, t_node **parent)
+t_node	**bstree_find(t_bstree *bstree, t_data key, t_node **parent)
 {
 	t_node	**node;
 	bool	less;
@@ -30,7 +31,7 @@ void	**bstree_find(t_bstree *bstree, t_data key, t_node **parent)
 	node = &bstree->root;
 	while (*node)
 	{
-		equal = compare(&(*node)->key, &key, NULL, &less);
+		equal = compare(&key, &(*node)->key, NULL, &less);
 		if (equal)
 			return (node);
 		if (parent)

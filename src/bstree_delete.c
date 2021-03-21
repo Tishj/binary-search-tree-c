@@ -13,6 +13,8 @@
 #include <bstree.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
+#include <stdio.h>
 
 //return the address of parent->(left/right) of the leaf node
 static t_node		**leaf(t_node **node, bool higher)
@@ -20,7 +22,7 @@ static t_node		**leaf(t_node **node, bool higher)
 	if (higher)
 	{
 		node = &(*node)->right;
-		while (*node && ((*node)->left))
+		while (*node && (*node)->left)
 			node = &(*node)->left;
 		return (node);
 	}
@@ -32,11 +34,8 @@ static t_node		**leaf(t_node **node, bool higher)
 
 static void	delete(t_node **node)
 {
-	t_node *delete;
-
-	delete = *node;
+	free(*node);
 	*node = NULL;
-	free(delete);
 }
 
 static void delete_one_child(t_node **node)
@@ -61,7 +60,10 @@ static void delete_two_children(t_node **node)
 	replacement = leaf(node, true);
 	(*node)->key = (*replacement)->key;
 	(*node)->val = (*replacement)->val;
-	delete(replacement);
+	if ((*replacement)->left || (*replacement)->right)
+		delete_one_child(replacement);
+	else
+		delete(replacement);
 }
 
 //if parent is NULL, the node is ROOT

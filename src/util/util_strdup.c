@@ -6,12 +6,12 @@
 /*   By: tishj <tishj@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 18:13:25 by tishj         #+#    #+#                 */
-/*   Updated: 2021/03/07 22:18:43 by tishj         ########   odam.nl         */
+/*   Updated: 2021/03/19 18:12:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <reins_int.h>
+#include <bstree.h>
 
 char	*util_strdup(char *str)
 {

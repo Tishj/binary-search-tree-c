@@ -16,10 +16,13 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+#define BLACK true
+#define RED false
+
 typedef struct	s_data
 {
-	size_t		size;
 	char		*data;
+	size_t		size;
 }				t_data;
 
 typedef struct s_node	t_node;
@@ -39,13 +42,25 @@ typedef struct	s_bstree
 	size_t		key_type_size;
 	size_t		val_type_size;
 	t_node		*root;
+	t_node		*low;
+	t_node		*high;
 }				t_bstree;
 
 int				bstree_delete(t_bstree *bstree, t_data key);
-void			**bstree_find(t_bstree *bstree, t_data key, t_node **parent);
+t_node			**bstree_find(t_bstree *bstree, t_data key, t_node **parent);
 int				bstree_init(t_bstree *bstree, size_t key_type_size, size_t val_type_size);
 int				bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite);
 
 bool			compare(t_data *elem1, t_data *elem2, bool *greater, bool *less);
+
+int				util_atoi(char *str);
+size_t			util_strlen(char *str);
+void			util_bzero(void *dest, size_t n);
+void			util_memcpy(void *dest, void *src, size_t n);
+int				util_memcmp(void *dest, void *src, size_t n);
+int				util_strncmp(char *str1, char *str2, size_t n);
+char			*util_strdup(char *str);
+size_t			util_strnlen(char *str, size_t n);
+void			util_strncpy(char *dest, char *src, size_t n);
 
 #endif

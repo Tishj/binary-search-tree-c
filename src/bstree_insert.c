@@ -13,6 +13,7 @@
 #include <bstree.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 static t_node	*node_new(t_data key, t_data val, t_node *parent)
 {
@@ -36,7 +37,10 @@ int		bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite)
 
 	node = bstree_find(bstree, key, &parent);
 	if (!*node)
+	{
 		*node = node_new(key, val, parent);
+		bstree->size++;
+	}
 	if (!*node)
 		return (0);
 	if (!overwrite)
