@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_insert.c                                     :+:    :+:            */
+/*   bstree_insert.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/19 15:36:06 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/19 16:19:32 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/21 21:47:25 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_node	*node_new(t_data key, t_data val, t_node *parent)
 	return (node);
 }
 
-int		bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite)
+int	bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite)
 {
 	t_node	**node;
 	t_node	*parent;

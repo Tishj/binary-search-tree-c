@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 16:21:18 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/19 17:20:59 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/21 21:46:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	compares at max min(elem1->size, elem2->size) bytes
 **	sets 'less' and returns whether elem1 and elem2 are equal
 */
-bool		compare(t_data *elem1, t_data *elem2, bool *greater, bool *less)
+bool	compare(t_data *elem1, t_data *elem2, bool *greater, bool *less)
 {
 	size_t	compare_size;
 	int		res;

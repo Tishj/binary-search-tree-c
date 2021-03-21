@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_delete.c                                     :+:    :+:            */
+/*   bstree_delete.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/19 16:20:11 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/19 16:23:52 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/21 21:49:59 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/21 21:49:59 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include <assert.h>
 #include <stdio.h>
 
-//return the address of parent->(left/right) of the leaf node
-static t_node		**leaf(t_node **node, bool higher)
+/*
+**	Return the address of parent->(left/right) of the replacement node
+*/
+static t_node	**replacement(t_node **node, bool higher)
 {
 	if (higher)
 	{
@@ -32,7 +34,7 @@ static t_node		**leaf(t_node **node, bool higher)
 	return (node);
 }
 
-static void delete_one_child(t_node **node)
+static void	delete_one_child(t_node **node)
 {
 	bool	right_child;
 	t_node	*replacement;
@@ -47,22 +49,24 @@ static void delete_one_child(t_node **node)
 	*node = replacement;
 }
 
-static void delete_two_children(t_node **node)
+static void	delete_two_children(t_node **node)
 {
-	t_node	**replacement;
+	t_node	**rep;
 
-	replacement = leaf(node, true);
-	(*node)->key = (*replacement)->key;
-	(*node)->val = (*replacement)->val;
-	if ((*replacement)->left || (*replacement)->right)
-		delete_one_child(replacement);
+	rep = replacement(node, true);
+	(*node)->key = (*rep)->key;
+	(*node)->val = (*rep)->val;
+	if ((*rep)->left || (*rep)->right)
+		delete_one_child(rep);
 	else
-		node_delete(replacement);
+		node_delete(rep);
 }
 
-//if parent is NULL, the node is ROOT
-//*node is parent->(left/right)
-int		bstree_delete(t_bstree *bstree, t_data key)
+/*
+**	if parent is NULL, the node is ROOT
+**	node is &parent->(left/right)
+*/
+int	bstree_delete(t_bstree *bstree, t_data key)
 {
 	t_node	**node;
 	t_node	*parent;
