@@ -32,12 +32,6 @@ static t_node		**leaf(t_node **node, bool higher)
 	return (node);
 }
 
-static void	delete(t_node **node)
-{
-	free(*node);
-	*node = NULL;
-}
-
 static void delete_one_child(t_node **node)
 {
 	bool	right_child;
@@ -49,7 +43,7 @@ static void delete_one_child(t_node **node)
 	else
 		replacement = (*node)->left;
 	replacement->parent = (*node)->parent;
-	delete(node);
+	node_delete(node);
 	*node = replacement;
 }
 
@@ -63,7 +57,7 @@ static void delete_two_children(t_node **node)
 	if ((*replacement)->left || (*replacement)->right)
 		delete_one_child(replacement);
 	else
-		delete(replacement);
+		node_delete(replacement);
 }
 
 //if parent is NULL, the node is ROOT
@@ -80,6 +74,7 @@ int		bstree_delete(t_bstree *bstree, t_data key)
 	node = bstree_find(bstree, key, &parent);
 	if (!*node)
 		return (1);
+	printf("Deleting %s\n", key.data);
 	left_child = ((*node)->left != NULL);
 	right_child = ((*node)->right != NULL);
 	if (left_child && right_child)
@@ -87,7 +82,7 @@ int		bstree_delete(t_bstree *bstree, t_data key)
 	else if (left_child || right_child)
 		delete_one_child(node);
 	else
-		delete(node);
+		node_delete(node);
 	bstree->size--;
 	return (1);
 }

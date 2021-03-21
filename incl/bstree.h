@@ -46,10 +46,17 @@ typedef struct	s_bstree
 	t_node		*high;
 }				t_bstree;
 
+void			bstree_destroy(t_bstree *bstree);
 int				bstree_delete(t_bstree *bstree, t_data key);
 t_node			**bstree_find(t_bstree *bstree, t_data key, t_node **parent);
 int				bstree_init(t_bstree *bstree, size_t key_type_size, size_t val_type_size);
 int				bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite);
+
+void			node_delete(t_node **node);
+t_node			*node_next(t_node *node);
+t_node			*node_prev(t_node *node);
+t_node			*node_lowest(t_bstree *bstree);
+t_node			*node_highest(t_bstree *bstree);
 
 bool			compare(t_data *elem1, t_data *elem2, bool *greater, bool *less);
 
