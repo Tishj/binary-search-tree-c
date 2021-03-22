@@ -25,6 +25,8 @@ typedef struct	s_data
 	size_t		size;
 }				t_data;
 
+typedef void (*t_destructor)(t_data data);
+
 typedef struct s_node	t_node;
 
 struct	s_node

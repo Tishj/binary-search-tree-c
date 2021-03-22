@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 17:56:45 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/21 20:56:09 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/22 21:03:09 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	iter_plusplus(t_node *node)
 {
 	while (node)
 	{
-		printf("key: %s\n", node->key.data);
+		printf("key: %s - val: %d\n", node->key.data, (int)(unsigned long)node->val.data);
 		node = node_next(node);
 	}
 }
@@ -41,7 +41,7 @@ void	iter_minmin(t_node *node)
 {
 	while (node)
 	{
-		printf("key: %s\n", node->key.data);
+		printf("key: %s - val: %d\n", node->key.data, (int)(unsigned long)node->val.data);
 		node = node_prev(node);
 	}
 }
@@ -73,26 +73,26 @@ int	main(void)
 	iter_plusplus(node_lowest(&bstree));
 	printf("\n---\n");
 	iter_minmin(node_highest(&bstree));
-	if (!bstree_delete(&bstree, (t_data){"moth", 4}))
-		return (1);
+	// if (!bstree_delete(&bstree, (t_data){"moth", 4}))
+	// 	return (1);
 	if (!bstree_delete(&bstree, (t_data){"afrika", 7}))
 		return (1);
 	if (!bstree_delete(&bstree, (t_data){"hello", 5}))
 		return (1);
 	if (!bstree_delete(&bstree, (t_data){"hila", 4}))
 		return (1);
-	if (!bstree_delete(&bstree, (t_data){"yeet", 4}))
-		return (1);
+	// if (!bstree_delete(&bstree, (t_data){"yeet", 4}))
+	// 	return (1);
 	if (!bstree_delete(&bstree, (t_data){"chad", 4}))
 		return (1);
-	if (!bstree_delete(&bstree, (t_data){"vogel", 5}))
-		return (1);
+	// if (!bstree_delete(&bstree, (t_data){"vogel", 5}))
+	// 	return (1);
 	if (!bstree_delete(&bstree, (t_data){"boom", 4}))
 		return (1);
-	if (!bstree_delete(&bstree, (t_data){"nemo", 4}))
-		return (1);
-	if (!bstree_delete(&bstree, (t_data){"nemo", 4}))
-		return (1);
+	// if (!bstree_delete(&bstree, (t_data){"nemo", 4}))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, (t_data){"nemo", 4}))
+	// 	return (1);
 	for (size_t i = 0; i < sizeof(keys) / sizeof(char*); i++)
 		find_element(&bstree, (t_data){keys[i], strlen(keys[i])});
 	find_element(&bstree, (t_data){"hello", 5});
