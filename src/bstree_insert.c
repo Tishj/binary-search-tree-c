@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:40:24 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/23 00:33:36 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ static t_node	*node_new(void *key, size_t keysize, void *val, t_node *parent)
 	node->parent = parent;
 	node->left = NULL;
 	node->right = NULL;
-	node->key = key;
+	node->key = util_memdup(key, keysize);
+	if (!node->key)
+	{
+		free(node);
+		return (NULL);
+	}
 	node->size = keysize;
 	node->val = val;
 	return (node);
@@ -42,10 +47,10 @@ int	bstree_insert(t_bstree *bstree, void *key, size_t keysize, void *val, bool o
 	{
 		*node = node_new(key, keysize, val, parent);
 		bstree->size++;
-		return (1);
-	}
-	if (!*node)
+		if (*node)
+			return (1);
 		return (0);
+	}
 	if (!overwrite)
 		return (1);
 	if (bstree->del)

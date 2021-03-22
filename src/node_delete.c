@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 20:24:20 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:38:03 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/23 00:18:18 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	node_delete(t_node **node, t_destructor del)
 {
 	if (del)
 		del((*node)->val);
+	free((*node)->key);
 	free(*node);
 	*node = NULL;
 }

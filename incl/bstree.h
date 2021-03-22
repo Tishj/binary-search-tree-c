@@ -72,6 +72,7 @@ size_t			util_strlen(char *str);
 void			util_bzero(void *dest, size_t n);
 void			util_memcpy(void *dest, void *src, size_t n);
 int				util_memcmp(void *dest, void *src, size_t n);
+void			*util_memdup(void *src, size_t size);
 int				util_strncmp(char *str1, char *str2, size_t n);
 char			*util_strdup(char *str);
 size_t			util_strnlen(char *str, size_t n);
