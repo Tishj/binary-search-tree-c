@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:47:42 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:37:35 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/22 22:42:59 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_node	**bstree_find(t_bstree *bstree, void *key,
 	node = &bstree->root;
 	while (*node)
 	{
-		res = bstree->comp((*node)->key, key, min((*node)->size, keysize));
+		res = bstree->comp((*node)->key, key,
+			bstree->key_type_size * min((*node)->size, keysize));
 		if (!res)
 			return (node);
 		if (parent)

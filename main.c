@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 17:56:45 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:36:14 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/22 22:45:36 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,32 @@ int	main(void)
 	if (!bstree_insert(&bstree, "hello", strlen("hello"), strdup("yeet"), true))
 		return (1);
 	for (size_t i = 0; i < len; i++)
-		if (!bstree_insert(&bstree, keys[i], strlen(keys[i]), dup[i], true))
+		if (!bstree_insert(&bstree, keys[i], strlen(keys[i]), dup[len - i - 1], true))
 			return (1);
 	printf("yeet\n");
 	iter_plusplus(node_lowest(&bstree));
 	printf("\n---\n");
 	iter_minmin(node_highest(&bstree));
-	// if (!bstree_delete(&bstree, "moth", 4))
-	// 	return (1);
+	if (!bstree_delete(&bstree, "moth", 4))
+		return (1);
 	if (!bstree_delete(&bstree, "afrika", 6))
 		return (1);
 	if (!bstree_delete(&bstree, "hello", 5))
 		return (1);
 	if (!bstree_delete(&bstree, "hila", 4))
 		return (1);
-	// if (!bstree_delete(&bstree, "yeet", 4))
-	// 	return (1);
+	if (!bstree_delete(&bstree, "yeet", 4))
+		return (1);
 	if (!bstree_delete(&bstree, "chad", 4))
 		return (1);
-	// if (!bstree_delete(&bstree, "vogel", 5))
-	// 	return (1);
+	if (!bstree_delete(&bstree, "vogel", 5))
+		return (1);
 	if (!bstree_delete(&bstree, "boom", 4))
 		return (1);
-	// if (!bstree_delete(&bstree, "nemo", 4))
-	// 	return (1);
-	// if (!bstree_delete(&bstree, "nemo", 4))
-	// 	return (1);
+	if (!bstree_delete(&bstree, "nemo", 4))
+		return (1);
+	if (!bstree_delete(&bstree, "nemo", 4))
+		return (1);
 	for (size_t i = 0; i < sizeof(keys) / sizeof(char*); i++)
 		find_element(&bstree, keys[i], strlen(keys[i]));
 	find_element(&bstree, "hello", 5);
