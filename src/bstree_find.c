@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:47:42 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/21 21:47:43 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/22 22:37:35 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,35 @@
 #include <stddef.h>
 #include <stdio.h>
 
+static size_t	min(size_t a, size_t b)
+{
+	if (b > a)
+		return (a);
+	return (b);
+}
+
 /*
 **	return the address of the node, or the address of the variable
 **	that the node should be inserted at.
 **	sets 'parent' to the parent of the node
 */
-t_node	**bstree_find(t_bstree *bstree, t_data key, t_node **parent)
+t_node	**bstree_find(t_bstree *bstree, void *key,
+		size_t keysize, t_node **parent)
 {
 	t_node	**node;
-	bool	less;
-	bool	equal;
+	int		res;
 
 	if (parent)
 		*parent = NULL;
 	node = &bstree->root;
 	while (*node)
 	{
-		equal = compare(&key, &(*node)->key, NULL, &less);
-		if (equal)
+		res = bstree->comp((*node)->key, key, min((*node)->size, keysize));
+		if (!res)
 			return (node);
 		if (parent)
 			*parent = *node;
-		if (less)
+		if (res < 0)
 			node = &(*node)->left;
 		else
 			node = &(*node)->right;

@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:49:59 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 21:03:29 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/22 22:27:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@
 #include <assert.h>
 #include <stdio.h>
 
-void	swap_data(t_data *a, t_data *b)
+void	swap_keyval(t_node *a, t_node *b)
 {
-	t_data	tmp;
+	void	*tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	tmp = a->key;
+	a->key = b->key;
+	b->key = tmp;
+
+	tmp = a->val;
+	a->val = b->val;
+	b->val = tmp;
 }
 
 /*
@@ -43,7 +47,7 @@ static t_node	**replacement(t_node **node, bool higher)
 	return (node);
 }
 
-static void	delete_one_child(t_node **node)
+static void	delete_one_child(t_node **node, t_destructor del)
 {
 	bool	right_child;
 	t_node	*replacement;
@@ -54,33 +58,27 @@ static void	delete_one_child(t_node **node)
 	else
 		replacement = (*node)->left;
 	replacement->parent = (*node)->parent;
-	node_delete(node);
+	node_delete(node, del);
 	*node = replacement;
 }
 
-static void	delete_two_children(t_node **node)
+static void	delete_two_children(t_node **node, t_destructor del)
 {
 	t_node	**rep;
 
-	//Get the replacement node
 	rep = replacement(node, true);
-	//Swap the key and val between *node and *rep
-	swap_data(&(*node)->key, &(*rep)->key);
-	swap_data(&(*node)->val, &(*rep)->val);
-	//If replacement has a child
-	printf("replacement: %s : %d\n", (*rep)->key.data, (int)(unsigned long)(*rep)->val.data);
+	swap_keyval(*node, *rep);
 	if ((*rep)->left || (*rep)->right)
-		delete_one_child(rep);
-	//If it's a leaf node
+		delete_one_child(rep, del);
 	else
-		node_delete(rep);
+		node_delete(rep, del);
 }
 
 /*
 **	if parent is NULL, the node is ROOT
 **	node is &parent->(left/right)
 */
-int	bstree_delete(t_bstree *bstree, t_data key)
+int	bstree_delete(t_bstree *bstree, void *key, size_t keysize)
 {
 	t_node	**node;
 	t_node	*parent;
@@ -89,20 +87,17 @@ int	bstree_delete(t_bstree *bstree, t_data key)
 
 	if (!bstree->size)
 		return (1);
-	//Check if it even exists in the tree
-	node = bstree_find(bstree, key, &parent);
+	node = bstree_find(bstree, key, keysize, &parent);
 	if (!*node)
 		return (1);
-	printf("Deleting %s\n", key.data);
-	//Check if and how many children it has
 	left_child = ((*node)->left != NULL);
 	right_child = ((*node)->right != NULL);
 	if (left_child && right_child)
-		delete_two_children(node);
+		delete_two_children(node, bstree->del);
 	else if (left_child || right_child)
-		delete_one_child(node);
+		delete_one_child(node, bstree->del);
 	else
-		node_delete(node);
+		node_delete(node, bstree->del);
 	bstree->size--;
 	return (1);
 }

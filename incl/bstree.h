@@ -25,14 +25,16 @@ typedef struct	s_data
 	size_t		size;
 }				t_data;
 
-typedef void (*t_destructor)(t_data data);
+typedef void (*t_destructor)(void *);
+typedef int (*t_compare)(void *a, void *b, size_t size);
 
 typedef struct s_node	t_node;
 
 struct	s_node
 {
-	t_data		key;
-	t_data		val;
+	void		*key;
+	size_t		size;
+	void		*val;
 	t_node		*right;
 	t_node		*left;
 	t_node		*parent;
@@ -40,21 +42,24 @@ struct	s_node
 
 typedef struct	s_bstree
 {
-	size_t		size;
-	size_t		key_type_size;
-	size_t		val_type_size;
-	t_node		*root;
-	t_node		*low;
-	t_node		*high;
+	size_t			size;
+	size_t			key_type_size;
+	t_node			*root;
+	// t_node			*low;
+	// t_node			*high;
+	t_compare		comp;
+	t_destructor	del;
 }				t_bstree;
 
-void			bstree_destroy(t_bstree *bstree);
-int				bstree_delete(t_bstree *bstree, t_data key);
-t_node			**bstree_find(t_bstree *bstree, t_data key, t_node **parent);
-int				bstree_init(t_bstree *bstree, size_t key_type_size, size_t val_type_size);
-int				bstree_insert(t_bstree *bstree, t_data key, t_data val, bool overwrite);
+void			bstree_clear(t_bstree *bstree);
+int				bstree_delete(t_bstree *bstree, void *key, size_t keysize);
+t_node			**bstree_find(t_bstree *bstree, void *key, size_t keysize, t_node **parent);
+int				bstree_init(t_bstree *bstree, size_t key_type_size,
+				t_compare comp, t_destructor del);
+int				bstree_insert(t_bstree *bstree, void *key, size_t keysize,
+				void *data, bool overwrite);
 
-void			node_delete(t_node **node);
+void			node_delete(t_node **node, t_destructor del);
 t_node			*node_next(t_node *node);
 t_node			*node_prev(t_node *node);
 t_node			*node_lowest(t_bstree *bstree);
