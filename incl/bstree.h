@@ -69,5 +69,6 @@ int				util_strncmp(char *str1, char *str2, size_t n);
 char			*util_strdup(char *str);
 size_t			util_strnlen(char *str, size_t n);
 void			util_strncpy(char *dest, char *src, size_t n);
+void			util_swap(void *a, void *b, size_t type_size);
 
 #endif

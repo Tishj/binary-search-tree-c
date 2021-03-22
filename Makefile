@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/19 18:02:35 by tbruinem      #+#    #+#                  #
-#    Updated: 2021/03/21 20:29:42 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/22 20:38:30 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC =	util/util_atoi.c \
 		util/util_strncmp.c \
 		util/util_strnlen.c \
 		util/util_strncpy.c \
+		util/util_swap.c \
 		node_delete.c \
 		node_lowest.c \
 		node_highest.c \
