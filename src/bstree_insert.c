@@ -6,11 +6,11 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/23 00:33:36 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree.h>
+#include <bstree_int.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -36,13 +36,13 @@ static t_node	*node_new(void *key, size_t keysize, void *val, t_node *parent)
 	return (node);
 }
 
-//do we want to del() the previous value in node? when overwriting
-int	bstree_insert(t_bstree *bstree, void *key, size_t keysize, void *val, bool overwrite)
+int	bstree_insert(t_bstree *bstree, void *key,
+	size_t keysize, void *val, bool overwrite)
 {
 	t_node	**node;
 	t_node	*parent;
 
-	node = bstree_find(bstree, key, keysize, &parent);
+	node = node_find(bstree, key, keysize, &parent);
 	if (!*node)
 	{
 		*node = node_new(key, keysize, val, parent);

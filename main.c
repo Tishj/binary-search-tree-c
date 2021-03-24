@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 17:56:45 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:45:36 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:40:57 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 void	find_element(t_bstree *bstree, void *key, size_t keysize)
 {
-	t_node **node;
+	void	*value;
 
-	node = bstree_find(bstree, key, keysize, NULL);
-	if (*node)
+	value = bstree_find(bstree, key, keysize);
+	if (value)
 //		printf("Found key \"%s\", containing value: %d\n", key.data, (int)(unsigned long)(*node)->val.data);
-		printf("Found key \"%s\", containing value: %s\n", (char*)key, (char*)(*node)->val);
+		printf("Found key \"%s\", containing value: %s\n", (char*)key, (char*)value);
 	else
 		printf("Did not find a node with key \"%s\"\n", (char *)key);
 }
@@ -91,38 +91,38 @@ int	main(void)
 	if (!bstree_init(&bstree, sizeof(char), util_memcmp, free))
 		return (1);
 	find_element(&bstree, "hello", 5);
-	if (!bstree_insert(&bstree, "hello", strlen("hello"), strdup("yeet"), true))
+	if (!bstree_insert(&bstree, "hello", strlen("hello") + 1, strdup("yeet"), true))
 		return (1);
 	for (size_t i = 0; i < len; i++)
-		if (!bstree_insert(&bstree, keys[i], strlen(keys[i]), dup[len - i - 1], true))
+		if (!bstree_insert(&bstree, keys[i], strlen(keys[i]) + 1, dup[len - i - 1], true))
 			return (1);
 	printf("yeet\n");
 	iter_plusplus(node_lowest(&bstree));
 	printf("\n---\n");
 	iter_minmin(node_highest(&bstree));
-	if (!bstree_delete(&bstree, "moth", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "afrika", 6))
-		return (1);
-	if (!bstree_delete(&bstree, "hello", 5))
-		return (1);
-	if (!bstree_delete(&bstree, "hila", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "yeet", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "chad", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "vogel", 5))
-		return (1);
-	if (!bstree_delete(&bstree, "boom", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "nemo", 4))
-		return (1);
-	if (!bstree_delete(&bstree, "nemo", 4))
-		return (1);
+	// if (!bstree_delete(&bstree, "moth", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "afrika", 7))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "hello", 6))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "hila", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "yeet", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "chad", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "vogel", 6))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "boom", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "nemo", 5))
+	// 	return (1);
+	// if (!bstree_delete(&bstree, "nemo", 5))
+	// 	return (1);
 	for (size_t i = 0; i < sizeof(keys) / sizeof(char*); i++)
 		find_element(&bstree, keys[i], strlen(keys[i]));
-	find_element(&bstree, "hello", 5);
+	find_element(&bstree, "hello", 6);
 	bstree_clear(&bstree);
 	free(dup);
 	return (0);

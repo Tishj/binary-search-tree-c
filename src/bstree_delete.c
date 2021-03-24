@@ -6,11 +6,11 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:49:59 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:27:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree.h>
+#include <bstree_int.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
@@ -87,7 +87,7 @@ int	bstree_delete(t_bstree *bstree, void *key, size_t keysize)
 
 	if (!bstree->size)
 		return (1);
-	node = bstree_find(bstree, key, keysize, &parent);
+	node = node_find(bstree, key, keysize, &parent);
 	if (!*node)
 		return (1);
 	left_child = ((*node)->left != NULL);

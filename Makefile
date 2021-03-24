@@ -6,7 +6,7 @@
 #    By: tbruinem <tbruinem@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/03/19 18:02:35 by tbruinem      #+#    #+#                  #
-#    Updated: 2021/03/23 00:37:55 by tbruinem      ########   odam.nl          #
+#    Updated: 2021/03/24 09:29:31 by tbruinem      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,12 @@ SRC =	util/util_atoi.c \
 		node_highest.c \
 		node_next.c \
 		node_prev.c \
+		node_find.c \
 		bstree_init.c \
 		bstree_insert.c \
-		key_compare.c \
+		bstree_find.c \
 		bstree_delete.c \
-		bstree_clear.c \
-		bstree_find.c
+		bstree_clear.c
 
 OBJ :=	$(SRC:%.c=$(OBJ_DIR)%.o)
 SRC :=	$(SRC:%.c=$(SRC_DIR)%.c)

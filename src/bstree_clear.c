@@ -6,11 +6,11 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 21:57:02 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/22 22:23:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree.h>
+#include <bstree_int.h>
 
 /*
 **	Go left or right until you hit a leaf node, delete the leaf node and
