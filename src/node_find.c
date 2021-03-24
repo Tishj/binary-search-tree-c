@@ -39,7 +39,7 @@ t_node	**node_find(t_bstree *bstree, void *key,
 	while (*node)
 	{
 		res = bstree->comp((*node)->key, key,
-			bstree->key_type_size * min((*node)->size, keysize));
+				bstree->key_type_size * min((*node)->size, keysize));
 		if (!res)
 			return (node);
 		if (parent)

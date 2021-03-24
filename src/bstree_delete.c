@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:49:59 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:50:10 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	swap_keyval(t_node *a, t_node *b)
 	tmp = a->key;
 	a->key = b->key;
 	b->key = tmp;
-
 	tmp = a->val;
 	a->val = b->val;
 	b->val = tmp;

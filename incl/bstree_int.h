@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 09:19:53 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:26:11 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:48:33 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ size_t			util_strnlen(char *str, size_t n);
 void			util_strncpy(char *dest, char *src, size_t n);
 void			util_swap(void *a, void *b, size_t type_size);
 
+t_node			*node_new(void *key, size_t keysize,
+				void *val, t_node *parent);
 void			node_delete(t_node **node, t_destructor del);
 t_node			**node_find(t_bstree *bstree, void *key,
 				size_t keysize, t_node **parent);

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_insert.c                                    :+:    :+:            */
+/*   bstree_assign.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:46:35 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/24 09:44:43 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/24 09:45:33 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bstree_int.h>
-#include <stdio.h>
 
-int	bstree_insert(t_bstree *bstree, void *key, size_t keysize, void *val)
+int	bstree_assign(t_bstree *bstree, void *key, size_t keysize, void *val)
 {
 	t_node	**node;
 	t_node	*parent;
@@ -27,5 +26,8 @@ int	bstree_insert(t_bstree *bstree, void *key, size_t keysize, void *val)
 			return (1);
 		return (0);
 	}
+	if (bstree->del)
+		bstree->del((*node)->val);
+	(*node)->val = val;
 	return (1);
 }

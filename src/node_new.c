@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_insert.c                                    :+:    :+:            */
+/*   node_new.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:46:35 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/24 09:45:54 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/03/24 09:46:55 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bstree_int.h>
-#include <stdio.h>
+#include <stdlib.h>
 
-int	bstree_insert(t_bstree *bstree, void *key, size_t keysize, void *val)
+t_node	*node_new(void *key, size_t keysize, void *val, t_node *parent)
 {
-	t_node	**node;
-	t_node	*parent;
+	t_node	*node;
 
-	node = node_find(bstree, key, keysize, &parent);
-	if (!*node)
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->parent = parent;
+	node->left = NULL;
+	node->right = NULL;
+	node->key = util_memdup(key, keysize);
+	if (!node->key)
 	{
-		*node = node_new(key, keysize, val, parent);
-		bstree->size++;
-		if (*node)
-			return (1);
-		return (0);
+		free(node);
+		return (NULL);
 	}
-	return (1);
+	node->size = keysize;
+	node->val = val;
+	return (node);
 }

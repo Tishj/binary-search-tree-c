@@ -22,7 +22,9 @@ int				bstree_init(t_bstree *bstree, size_t key_type_size,
 				t_compare comp, t_destructor del);
 void			*bstree_find(t_bstree *bstree, void *key, size_t keysize);
 int				bstree_insert(t_bstree *bstree, void *key, size_t keysize,
-				void *data, bool overwrite);
+				void *val);
+int				bstree_assign(t_bstree *bstree, void *key, size_t keysize,
+				void *val);
 
 t_node			*node_next(t_node *node);
 t_node			*node_prev(t_node *node);

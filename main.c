@@ -6,7 +6,7 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 17:56:45 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:40:57 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/03/24 09:50:31 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ int	main(void)
 	if (!bstree_init(&bstree, sizeof(char), util_memcmp, free))
 		return (1);
 	find_element(&bstree, "hello", 5);
-	if (!bstree_insert(&bstree, "hello", strlen("hello") + 1, strdup("yeet"), true))
+	if (!bstree_assign(&bstree, "hello", strlen("hello") + 1, strdup("yeet")))
 		return (1);
 	for (size_t i = 0; i < len; i++)
-		if (!bstree_insert(&bstree, keys[i], strlen(keys[i]) + 1, dup[len - i - 1], true))
+		if (!bstree_assign(&bstree, keys[i], strlen(keys[i]) + 1, dup[len - i - 1]))
 			return (1);
 	printf("yeet\n");
 	iter_plusplus(node_lowest(&bstree));
